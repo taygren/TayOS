@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Citadel - Multi-Layered Agent System</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts: Inter and Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Top Nav Header -->
+    <header class="app-header">
+      <div class="brand-section">
+        <div class="brand-logo"></div>
+        <div class="brand-name">Agent Citadel</div>
+        <div class="brand-version">v1.2.0</div>
+      </div>
+      
+      <nav class="navigation-tabs">
+        <button class="nav-tab active" data-target="view-home">Dashboard</button>
+        <button class="nav-tab" data-target="view-sandbox">Orchestration Sandbox</button>
+        <button class="nav-tab" data-target="view-memory">Memory Palace</button>
+      </nav>
+      
+      <div class="user-profile">
+        <div class="user-avatar">TG</div>
+        <div class="user-name">Tay</div>
+      </div>
+    </header>
+
+    <!-- Core App Content -->
+    <main class="app-content">
+      
+      <!-- VIEW 1: Home Landing Page -->
+      <section id="view-home" class="view-section active">
+        <div class="glass-panel welcome-banner">
+          <h1>Tay's Multi-Layered Agent System</h1>
+          <p>Orchestrate complex startup concepts, AI engineering initiatives, and development blueprints. This grid leverages hierarchical rules and spatial Markdown Memory blocks to adapt, learn, and grow continuously across all projects.</p>
+        </div>
+
+        <div class="matrix-section-title">Operational 3x6 Agent Grid Matrix</div>
+        
+        <!-- Column Domain Headers -->
+        <div class="domain-headers">
+          <div class="domain-header-card">Orchestrate</div>
+          <div class="domain-header-card">Engineering</div>
+          <div class="domain-header-card">Testing / QA</div>
+          <div class="domain-header-card">Security</div>
+          <div class="domain-header-card">UI / Design</div>
+          <div class="domain-header-card">Release</div>
+        </div>
+
+        <div class="grid-matrix-container">
+          <!-- Row Layer Headers -->
+          <div class="layer-labels">
+            <div class="glass-panel layer-label-card">
+              <div class="layer-label-title">C-Suite</div>
+              <div class="layer-label-subtitle">Frame & Check</div>
+            </div>
+            <div class="glass-panel layer-label-card">
+              <div class="layer-label-title">Manager</div>
+              <div class="layer-label-subtitle">Lead & Review</div>
+            </div>
+            <div class="glass-panel layer-label-card">
+              <div class="layer-label-title">Analyst</div>
+              <div class="layer-label-subtitle">Execute & Build</div>
+            </div>
+          </div>
+
+          <!-- Main Grid Matrix -->
+          <div class="matrix-grid">
+            <!-- Row 1: C-Suite -->
+            <div class="matrix-row" id="row-csuite">
+              <!-- CSO -->
+              <div class="glass-panel agent-card layer-csuite" data-agent="cso">
+                <div class="agent-header">
+                  <span class="agent-code">L1-ORC</span>
+                  <span class="agent-status-dot idle" id="status-cso"></span>
+                </div>
+                <div class="agent-title">CSO</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Orchestrate</span>
+                </div>
+              </div>
+              <!-- CTO -->
+              <div class="glass-panel agent-card layer-csuite" data-agent="cto">
+                <div class="agent-header">
+                  <span class="agent-code">L1-ENG</span>
+                  <span class="agent-status-dot idle" id="status-cto"></span>
+                </div>
+                <div class="agent-title">CTO</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Engineering</span>
+                </div>
+              </div>
+              <!-- VP QA -->
+              <div class="glass-panel agent-card layer-csuite" data-agent="vp_qa">
+                <div class="agent-header">
+                  <span class="agent-code">L1-QA</span>
+                  <span class="agent-status-dot idle" id="status-vp_qa"></span>
+                </div>
+                <div class="agent-title">VP QA</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">QA & Testing</span>
+                </div>
+              </div>
+              <!-- CISO -->
+              <div class="glass-panel agent-card layer-csuite" data-agent="ciso">
+                <div class="agent-header">
+                  <span class="agent-code">L1-SEC</span>
+                  <span class="agent-status-dot idle" id="status-ciso"></span>
+                </div>
+                <div class="agent-title">CISO</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Security</span>
+                </div>
+              </div>
+              <!-- CDO -->
+              <div class="glass-panel agent-card layer-csuite" data-agent="cdo">
+                <div class="agent-header">
+                  <span class="agent-code">L1-UI</span>
+                  <span class="agent-status-dot idle" id="status-cdo"></span>
+                </div>
+                <div class="agent-title">CDO</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">UI & Design</span>
+                </div>
+              </div>
+              <!-- VP REL -->
+              <div class="glass-panel agent-card layer-csuite" data-agent="vp_rel">
+                <div class="agent-header">
+                  <span class="agent-code">L1-REL</span>
+                  <span class="agent-status-dot idle" id="status-vp_rel"></span>
+                </div>
+                <div class="agent-title">VP Release</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Release</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 2: Managers -->
+            <div class="matrix-row" id="row-manager">
+              <!-- PM -->
+              <div class="glass-panel agent-card layer-manager" data-agent="pm">
+                <div class="agent-header">
+                  <span class="agent-code">L2-ORC</span>
+                  <span class="agent-status-dot idle" id="status-pm"></span>
+                </div>
+                <div class="agent-title">Project Mgr</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Orchestrate</span>
+                </div>
+              </div>
+              <!-- Lead Eng -->
+              <div class="glass-panel agent-card layer-manager" data-agent="lead_eng">
+                <div class="agent-header">
+                  <span class="agent-code">L2-ENG</span>
+                  <span class="agent-status-dot idle" id="status-lead_eng"></span>
+                </div>
+                <div class="agent-title">Lead Eng</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Engineering</span>
+                </div>
+              </div>
+              <!-- QA Lead -->
+              <div class="glass-panel agent-card layer-manager" data-agent="qa_lead">
+                <div class="agent-header">
+                  <span class="agent-code">L2-QA</span>
+                  <span class="agent-status-dot idle" id="status-qa_lead"></span>
+                </div>
+                <div class="agent-title">QA Lead</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">QA & Testing</span>
+                </div>
+              </div>
+              <!-- Security Lead -->
+              <div class="glass-panel agent-card layer-manager" data-agent="sec_lead">
+                <div class="agent-header">
+                  <span class="agent-code">L2-SEC</span>
+                  <span class="agent-status-dot idle" id="status-sec_lead"></span>
+                </div>
+                <div class="agent-title">Sec Lead</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Security</span>
+                </div>
+              </div>
+              <!-- UI Manager -->
+              <div class="glass-panel agent-card layer-manager" data-agent="ui_mgr">
+                <div class="agent-header">
+                  <span class="agent-code">L2-UI</span>
+                  <span class="agent-status-dot idle" id="status-ui_mgr"></span>
+                </div>
+                <div class="agent-title">UI Manager</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">UI & Design</span>
+                </div>
+              </div>
+              <!-- Release Manager -->
+              <div class="glass-panel agent-card layer-manager" data-agent="rel_mgr">
+                <div class="agent-header">
+                  <span class="agent-code">L2-REL</span>
+                  <span class="agent-status-dot idle" id="status-rel_mgr"></span>
+                </div>
+                <div class="agent-title">Release Mgr</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Release</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 3: Analysts -->
+            <div class="matrix-row" id="row-analyst">
+              <!-- Ops Analyst -->
+              <div class="glass-panel agent-card layer-analyst" data-agent="ops">
+                <div class="agent-header">
+                  <span class="agent-code">L3-ORC</span>
+                  <span class="agent-status-dot idle" id="status-ops"></span>
+                </div>
+                <div class="agent-title">Ops Analyst</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Orchestrate</span>
+                </div>
+              </div>
+              <!-- Software Eng -->
+              <div class="glass-panel agent-card layer-analyst" data-agent="swe">
+                <div class="agent-header">
+                  <span class="agent-code">L3-ENG</span>
+                  <span class="agent-status-dot idle" id="status-swe"></span>
+                </div>
+                <div class="agent-title">Software Eng</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Engineering</span>
+                </div>
+              </div>
+              <!-- QA Eng -->
+              <div class="glass-panel agent-card layer-analyst" data-agent="qa_eng">
+                <div class="agent-header">
+                  <span class="agent-code">L3-QA</span>
+                  <span class="agent-status-dot idle" id="status-qa_eng"></span>
+                </div>
+                <div class="agent-title">QA Engineer</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">QA & Testing</span>
+                </div>
+              </div>
+              <!-- SecOps Analyst -->
+              <div class="glass-panel agent-card layer-analyst" data-agent="sec_ops">
+                <div class="agent-header">
+                  <span class="agent-code">L3-SEC</span>
+                  <span class="agent-status-dot idle" id="status-sec_ops"></span>
+                </div>
+                <div class="agent-title">SecOps Analyst</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Security</span>
+                </div>
+              </div>
+              <!-- UI Developer -->
+              <div class="glass-panel agent-card layer-analyst" data-agent="ui_dev">
+                <div class="agent-header">
+                  <span class="agent-code">L3-UI</span>
+                  <span class="agent-status-dot idle" id="status-ui_dev"></span>
+                </div>
+                <div class="agent-title">UI Developer</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">UI & Design</span>
+                </div>
+              </div>
+              <!-- DevOps Analyst -->
+              <div class="glass-panel agent-card layer-analyst" data-agent="devops">
+                <div class="agent-header">
+                  <span class="agent-code">L3-REL</span>
+                  <span class="agent-status-dot idle" id="status-devops"></span>
+                </div>
+                <div class="agent-title">DevOps Analyst</div>
+                <div class="agent-footer">
+                  <span class="agent-domain">Release</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary grid statistics -->
+        <div class="home-secondary-grid">
+          <div class="glass-panel">
+            <div class="panel-title">Spatial Memory Palace Statistics</div>
+            <div class="panel-content">
+              <div class="stats-list">
+                <div class="stats-item">
+                  <span class="stats-label">Root Global Memory ledgers</span>
+                  <span class="stats-value">1 (MEMORY.md)</span>
+                </div>
+                <div class="stats-item">
+                  <span class="stats-label">Active Project Wings</span>
+                  <span class="stats-value">3 (billing_app, test_idea, my_project)</span>
+                </div>
+                <div class="stats-item">
+                  <span class="stats-label">Active Workstation Rooms</span>
+                  <span class="stats-value">6 (Orchestration, Eng, QA, Security, UI, Rel)</span>
+                </div>
+                <div class="stats-item">
+                  <span class="stats-label">Custom Calibrated Style Guidelines</span>
+                  <span class="stats-value">12 rules</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-panel">
+            <div class="panel-title">System Orchestrator Performance</div>
+            <div class="panel-content">
+              <div class="stats-list">
+                <div class="stats-item">
+                  <span class="stats-label">Core Runtime Engine</span>
+                  <span class="stats-value" style="color: var(--primary-cyan)">Python 3.11</span>
+                </div>
+                <div class="stats-item">
+                  <span class="stats-label">Average Run Latency</span>
+                  <span class="stats-value" style="color: var(--success-green)">&lt; 380ms (Sub Doherty Limit)</span>
+                </div>
+                <div class="stats-item">
+                  <span class="stats-label">Self-Improvement Memory Iterations</span>
+                  <span class="stats-value">14 write-backs logged</span>
+                </div>
+                <div class="stats-item">
+                  <span class="stats-label">UX Compliance Audit Success Rate</span>
+                  <span class="stats-value" style="color: var(--secondary-violet)">98.2%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: Orchestration Sandbox -->
+      <section id="view-sandbox" class="view-section">
+        <div class="sandbox-grid">
+          <!-- Side Config Form -->
+          <div class="glass-panel sandbox-form">
+            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">Trigger Orchestrator</h2>
+            
+            <div class="form-group">
+              <label for="input-project">Project name</label>
+              <input type="text" id="input-project" class="form-input" placeholder="e.g. startup_invoice_broker" value="enterprise_billing">
+            </div>
+
+            <div class="form-group">
+              <label for="input-platform">Target Platform</label>
+              <select id="input-platform" class="form-select">
+                <option value="Web">Desktop Web Application</option>
+                <option value="Mobile">Mobile Web / Native iOS</option>
+                <option value="Desktop">Desktop Native App</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="input-idea">Concept / Core Idea</label>
+              <textarea id="input-idea" class="form-input form-textarea" placeholder="Detail your strategy startup concept or target application functionality here..."></textarea>
+            </div>
+
+            <div class="form-group" style="flex-direction: row; gap: 10px; align-items: center;">
+              <input type="checkbox" id="check-ux-review" checked style="cursor: pointer;">
+              <label for="check-ux-review" style="cursor: pointer; text-transform: none; font-size: 0.8rem;">Run automated UX Law Reviewer audit</label>
+            </div>
+
+            <button class="btn-primary" id="btn-launch">Launch Agent Pipeline</button>
+          </div>
+
+          <!-- Main Monitor View -->
+          <div class="glass-panel sandbox-monitor">
+            <div class="monitor-header">
+              <div class="monitor-project-info">
+                <span class="brand-logo" style="width: 16px; height: 16px; border-radius: 50%;"></span>
+                <span style="font-weight: 700; font-size: 0.95rem;" id="monitor-project-title">project: none</span>
+              </div>
+              <div class="monitor-status-badge" id="monitor-status">idle</div>
+            </div>
+
+            <div class="monitor-content">
+              <!-- Visual node stage steps -->
+              <div class="monitor-visual-stage">
+                <!-- Orch -->
+                <div class="stage-node" id="stage-orc">
+                  <div class="stage-node-icon">Orc</div>
+                  <div class="stage-node-label">Orchestrate</div>
+                </div>
+                <div class="stage-connector" id="conn-orc"></div>
+                <!-- Eng -->
+                <div class="stage-node" id="stage-eng">
+                  <div class="stage-node-icon">Eng</div>
+                  <div class="stage-node-label">Engineering</div>
+                </div>
+                <div class="stage-connector" id="conn-eng"></div>
+                <!-- QA -->
+                <div class="stage-node" id="stage-qa">
+                  <div class="stage-node-icon">QA</div>
+                  <div class="stage-node-label">Testing / QA</div>
+                </div>
+                <div class="stage-connector" id="conn-qa"></div>
+                <!-- Sec -->
+                <div class="stage-node" id="stage-sec">
+                  <div class="stage-node-icon">Sec</div>
+                  <div class="stage-node-label">Security</div>
+                </div>
+                <div class="stage-connector" id="conn-sec"></div>
+                <!-- UI -->
+                <div class="stage-node" id="stage-ui">
+                  <div class="stage-node-icon">UI</div>
+                  <div class="stage-node-label">UI / Design</div>
+                </div>
+                <div class="stage-connector" id="conn-ui"></div>
+                <!-- Rel -->
+                <div class="stage-node" id="stage-rel">
+                  <div class="stage-node-icon">Rel</div>
+                  <div class="stage-node-label">Release</div>
+                </div>
+              </div>
+
+              <!-- Real-time scrollable console -->
+              <div class="monitor-log-console" id="log-console">
+                <div class="console-line system">[SYSTEM] Grid controller waiting. Feed a startup concept and hit 'Launch'.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: Memory Palace Explorer -->
+      <section id="view-memory" class="view-section">
+        <div class="memory-explorer-grid">
+          <!-- Folder tree explorer -->
+          <div class="glass-panel folder-tree-panel">
+            <h3 style="font-size: 0.9rem; font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">Spatial Workspace</h3>
+            
+            <div class="tree-node active" data-file="global_rules">
+              <span class="tree-node-icon">📝</span>
+              <span>global_rules.md</span>
+            </div>
+            
+            <div class="tree-node" data-file="global_memory">
+              <span class="tree-node-icon">📝</span>
+              <span>MEMORY.md</span>
+            </div>
+
+            <!-- Folder workstations -->
+            <div style="margin-top: 12px;">
+              <div class="tree-node" style="cursor: default; pointer-events: none;">
+                <span class="tree-node-icon">📁</span>
+                <span style="font-weight: 600; color: var(--text-primary)">workstations</span>
+              </div>
+              <div class="tree-sub-folder">
+                <div class="tree-node" data-file="workstation_orc">
+                  <span class="tree-node-icon">📝</span>
+                  <span>orchestration_rules.md</span>
+                </div>
+                <div class="tree-node" data-file="workstation_eng">
+                  <span class="tree-node-icon">📝</span>
+                  <span>engineering_rules.md</span>
+                </div>
+                <div class="tree-node" data-file="workstation_ui">
+                  <span class="tree-node-icon">📝</span>
+                  <span>ui_design_rules.md</span>
+                </div>
+                <div class="tree-node" data-file="workstation_qa">
+                  <span class="tree-node-icon">📝</span>
+                  <span>qa_rules.md</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Folder projects -->
+            <div style="margin-top: 12px;">
+              <div class="tree-node" style="cursor: default; pointer-events: none;">
+                <span class="tree-node-icon">📁</span>
+                <span style="font-weight: 600; color: var(--text-primary)">projects</span>
+              </div>
+              <div class="tree-sub-folder">
+                <div class="tree-node" data-file="project_billing_rules">
+                  <span class="tree-node-icon">📝</span>
+                  <span>billing_app/rules.md</span>
+                </div>
+                <div class="tree-node" data-file="project_billing_memory">
+                  <span class="tree-node-icon">📝</span>
+                  <span>billing_app/MEMORY.md</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview Editor panel -->
+          <div class="glass-panel memory-viewer-panel">
+            <div class="viewer-header">
+              <div class="viewer-title" id="viewer-file-title">global_rules.md</div>
+              <div class="viewer-meta" id="viewer-file-meta">Path: /global_rules.md</div>
+            </div>
+            
+            <div class="viewer-body" id="viewer-content">
+              <!-- Loaded dynamically via js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Agent Details Modal -->
+  <div class="agent-modal" id="agent-modal">
+    <div class="glass-panel modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-title" id="modal-agent-name">Chief Strategy Officer (CSO)</div>
+          <div class="modal-subtitle" id="modal-agent-code">L1-ORC | Orchestrate</div>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="modal-section-title">Primary Operational Directives</div>
+          <p class="modal-text" id="modal-agent-desc">Evaluates incoming strategy startup models or technical layouts for general strategy fit, alignment, feasibility, and ROI. Formulates the overarching verification checklists that guide the execution pipeline.</p>
+        </div>
+        
+        <div>
+          <div class="modal-section-title">Workstation Rules & Standards</div>
+          <p class="modal-text" id="modal-agent-rules">Must align precisely with user parameters. Enforces that C-Suite strategic checks must pass before manager workflow breakdowns are generated.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
