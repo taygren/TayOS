@@ -12,13 +12,13 @@ The core of the system is structured as a **3x6 Agent Grid Matrix**, assigning c
 graph TD
     User([Tay / Idea Creator]) -->|Submit Idea / Prompt| C_Orch[C-Suite: Strategic Orchestration]
     
-    subgraph Memory & Rules Palace
+    subgraph MemoryPalace ["Memory & Rules Palace"]
         MP[(Hierarchical Markdown Memory)] <--> |Read/Write Context & Experience| C_Orch
         MP <--> |Shared Learnings: MEMORY.md| C_Suite
         MP <--> |Execution Details| Mgr
     end
     
-    subgraph C-Suite Layer (Plan, Frame, Review)
+    subgraph CSuiteLayer ["C-Suite Layer (Plan, Frame, Review)"]
         C_Orch --> C_Eng[C-Suite: Engineering]
         C_Orch --> C_QA[C-Suite: QA & Review]
         C_Orch --> C_Sec[C-Suite: Security]
@@ -26,7 +26,7 @@ graph TD
         C_Orch --> C_Rel[C-Suite: Release]
     end
 
-    subgraph Manager Layer (Lead, Execute, Review)
+    subgraph ManagerLayer ["Manager Layer (Lead, Execute, Review)"]
         C_Orch -.->|Delegates| M_Orch[Manager: Orchestration]
         C_Eng -.->|Delegates| M_Eng[Manager: Engineering]
         C_QA -.->|Delegates| M_QA[Manager: QA]
@@ -35,7 +35,7 @@ graph TD
         C_Rel -.->|Delegates| M_Rel[Manager: Release]
     end
 
-    subgraph Analyst Layer (Technical Execution)
+    subgraph AnalystLayer ["Analyst Layer (Technical Execution)"]
         M_Orch --> A_Orch[Analyst: Planning & Tracking]
         M_Eng --> A_Eng[Analyst: Coding & Dev]
         M_QA --> A_QA[Analyst: Test Writing & Execution]
