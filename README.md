@@ -2,9 +2,9 @@
 
 Welcome to **TayOS**—a sophisticated, multi-layered autonomous AI agent orchestrator engineered specifically for **Tay, a Strategy Consultant and AI/Solution Engineer**. 
 
-TayOS systematically translates raw technical and business concepts into high-fidelity production plans, clean typed code modules, and robust test suites. It operates via a 3-tier organizational hierarchy across 6 distinct functional domains, coordinate rules and lessons via a spatial Memory Palace hierarchy, and optimizes system quality through vertical and horizontal closed-loop audits.
+![TayOS Master Infographic - Synthesized architecture, workflows, rules, and audit loops](assets/tayos_citadel_infographic.png)
 
-![TayOS Overview - Translating raw concepts into production reality](assets/idea_to_reality.png)
+TayOS systematically translates raw technical and business concepts into high-fidelity production plans, clean typed code modules, and robust test suites. It operates via a 3-tier organizational hierarchy across 6 distinct functional domains, coordinate rules and lessons via a spatial Memory Palace hierarchy, and optimizes system quality through vertical and horizontal closed-loop audits.
 
 ---
 
