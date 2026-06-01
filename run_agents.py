@@ -144,13 +144,44 @@ class AgentOrchestratorCLI:
             
         console.print(f"[bold green][OK][/bold green] Appended calibrated guidelines to {proj_rules_file}")
 
+    def run_audit_loop(self, project_name: str, domain: str, source: str, target: str, draft: str, checklist_str: str, iteration: int = 1):
+        self.init_project(project_name)
+        console.print(Panel(f"Running Closed-Loop Auditor\nDomain: {domain} | Iteration: #{iteration}\nSource: {source} -> Target: {target}", title="[bold magenta]Closed-Loop Optimization[/bold magenta]", border_style="magenta"))
+        
+        # Split checklist by semicolon
+        checklist = [item.strip() for item in checklist_str.split(";") if item.strip()]
+        
+        with console.status("[bold yellow]Auditing work asset against checklist..."):
+            result = self.memory_sync.audit_work_asset(
+                project_name=project_name,
+                domain=domain,
+                source=source,
+                target=target,
+                asset_content=draft,
+                spec_checklist=checklist,
+                iteration=iteration
+            )
+            
+        console.print(f"\n[bold yellow]=== Audit Output Status: {result['status']} ===[/bold yellow]")
+        if result['status'] == 'APPROVED':
+            console.print("[bold green][SUCCESS] All checklist verification points are satisfied! Loop Approved.[/bold green]")
+        else:
+            console.print(f"[bold red][GAP IDENTIFIED] Found {result['gaps_count']} gaps. Generated FEEDBACK.md card.[/bold red]")
+            console.print(f"Feedback path: [blue]{result['feedback_path']}[/blue]")
+            console.print(f"Next iteration count: [yellow]#{result['iteration']}[/yellow]")
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Tay's Multi-Layered Agent System Controller")
-    parser.add_argument("action", choices=["init-project", "audit-ux", "run-pipeline", "analyze-behavior", "print-rules", "print-memory"])
+    parser.add_argument("action", choices=["init-project", "audit-ux", "run-pipeline", "analyze-behavior", "print-rules", "print-memory", "audit-loop"])
     parser.add_argument("--project", required=True, help="Name of the project")
     parser.add_argument("--query", help="The user prompt, layout, or path to work sample file")
     parser.add_argument("--domain", default="ui_design", help="Agent workstation domain")
     parser.add_argument("--platform", default="Web", help="Platform target for UX Review")
+    parser.add_argument("--source", default="CDO", help="Auditing Agent")
+    parser.add_argument("--target", default="UI Developer", help="Executing Agent")
+    parser.add_argument("--draft", help="Draft work asset content to audit")
+    parser.add_argument("--checklist", help="Semicolon separated list of checklist specs to verify")
+    parser.add_argument("--iteration", type=int, default=1, help="Current loop iteration count")
     
     args = parser.parse_args()
     
@@ -178,3 +209,17 @@ if __name__ == "__main__":
         cli.print_rules(args.domain, args.project)
     elif args.action == "print-memory":
         cli.print_memory(args.domain, args.project)
+    elif args.action == "audit-loop":
+        if not args.draft or not args.checklist:
+            print("Error: Both --draft content and --checklist are required for audit-loop")
+            sys.exit(1)
+        cli.run_audit_loop(
+            project_name=args.project,
+            domain=args.domain,
+            source=args.source,
+            target=args.target,
+            draft=args.draft,
+            checklist_str=args.checklist,
+            iteration=args.iteration
+        )
+

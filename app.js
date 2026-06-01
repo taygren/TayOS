@@ -379,8 +379,12 @@ btnLaunch.addEventListener('click', () => {
       title: "Frontend, UI, & Design",
       logs: [
         `[CDO] UX Reviewer - Initiating 30 Laws of UX review in Audit Mode...`,
-        `[CDO] Checking Hick's Law and Miller's Law option density... OK.`,
-        `[CDO] Checking Doherty Threshold visual loading states... OK.`,
+        `[CDO] Checking Hick's Law and Miller's Law option density...`,
+        `[WARNING] Miller's Law violation: Too many dashboard items concurrent.`,
+        `[CDO] GAP IDENTIFIED! Generated FEEDBACK.md card. State: RESOLVING.`,
+        `[SYSTEM] Re-routing vertical optimization loop to UI Developer...`,
+        `[UI Developer] Refactoring code... Chunked menu options into grouped cards.`,
+        `[CDO] Re-auditing work asset... Gaps satisfied! State: APPROVED.`,
         `[UI Manager] Layout - Designing card regional elements...`,
         `[UI Developer] Assets - Generating premium HSL glassmorphic style panels.`,
         `[SUCCESS] Premium front-end assets validated against UX standards.`
@@ -456,6 +460,36 @@ btnLaunch.addEventListener('click', () => {
       if (logText.includes('[SUCCESS]')) logType = 'success';
       if (logText.includes('[WARNING]')) logType = 'warning';
       if (logText.includes('[CDO]') || logText.includes('[CSO]') || logText.includes('[CTO]')) logType = 'highlight';
+      
+      // Inject closed-loop dynamic DOM animations
+      if (logText.includes('GAP IDENTIFIED')) {
+        const uiDevCard = document.querySelector('[data-agent="ui_dev"]');
+        if (uiDevCard && !document.getElementById('iter-badge-ui-dev')) {
+          const badge = document.createElement('span');
+          badge.className = 'iteration-badge';
+          badge.style.position = 'absolute';
+          badge.style.top = '8px';
+          badge.style.right = '28px';
+          badge.style.background = 'var(--alert-amber)';
+          badge.style.color = 'black';
+          badge.style.fontWeight = 'bold';
+          badge.style.fontSize = '0.65rem';
+          badge.style.padding = '1px 5px';
+          badge.style.borderRadius = '3px';
+          badge.style.fontFamily = 'var(--font-mono)';
+          badge.textContent = 'Iter 2';
+          badge.id = 'iter-badge-ui-dev';
+          uiDevCard.appendChild(badge);
+        }
+        const uiDevDot = document.getElementById('status-ui_dev');
+        if (uiDevDot) uiDevDot.className = 'agent-status-dot reviewing';
+      }
+      if (logText.includes('Gaps satisfied')) {
+        const badgeEl = document.getElementById('iter-badge-ui-dev');
+        if (badgeEl) badgeEl.remove();
+        const uiDevDot = document.getElementById('status-ui_dev');
+        if (uiDevDot) uiDevDot.className = 'agent-status-dot completed';
+      }
       
       logConsoleLine(logText, logType);
       logIndex++;

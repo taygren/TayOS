@@ -78,6 +78,59 @@ def run_tests():
     assert "Doherty Threshold" in report, "UX reviewer failed to flag Doherty Threshold violation!"
     assert "Miller's Law" in report or "Hick's Law" in report or "Choice Overload" in report, "UX reviewer failed to flag option density!"
     print("  [OK] UX Review report generated correctly and formatted.")
+
+    # 5. Test Closed-Loop Optimization Loops
+    print("\n[Test 5] Testing Closed-Loop Agent Audits...")
+    checklist = ["Must include HSL colors.", "Must include glassmorphism blur."]
+    test_draft = "Standard input form with a plain gray background."
+    
+    # Audit Iteration 1 (Should trigger resolving state)
+    result = sync.audit_work_asset(
+        project_name=test_project,
+        domain="ui_design",
+        source="CDO",
+        target="UI Developer",
+        asset_content=test_draft,
+        spec_checklist=checklist,
+        iteration=1
+    )
+    
+    assert result["status"] == "RESOLVING", "Closed-loop audit failed to flag incomplete checklist specifications!"
+    assert result["iteration"] == 2, "Failed to increment iteration count on audit rejection!"
+    assert os.path.exists(result["feedback_path"]), "Feedback card FEEDBACK.md was not written!"
+    print("  [OK] Closed-loop audit flagged gaps and wrote FEEDBACK.md card.")
+    
+    # Audit Iteration 3 (Should trigger failure ledger elevation)
+    result_repeat = sync.audit_work_asset(
+        project_name=test_project,
+        domain="ui_design",
+        source="CDO",
+        target="UI Developer",
+        asset_content=test_draft,
+        spec_checklist=checklist,
+        iteration=3
+    )
+    
+    ui_mem_path = os.path.join(workspace, "ui_design", "MEMORY.md")
+    with open(ui_mem_path, "r", encoding="utf-8") as f:
+        ui_mem_text = f.read()
+    assert "failure ledger" in ui_mem_text.lower(), "Repeated failures did not elevate to workstation failure ledger!"
+    print("  [OK] Persistent audit failures successfully elevated to workstation ledgers.")
+    
+    # Audit Iteration 4 with Resolved content (Should transition to APPROVED)
+    resolved_draft = "High-fidelity landing page with glassmorphism blur and custom HSL color styling values."
+    result_resolved = sync.audit_work_asset(
+        project_name=test_project,
+        domain="ui_design",
+        source="CDO",
+        target="UI Developer",
+        asset_content=resolved_draft,
+        spec_checklist=checklist,
+        iteration=4
+    )
+    assert result_resolved["status"] == "APPROVED", "Failed to transition loop to APPROVED once checklist was satisfied!"
+    assert not os.path.exists(result_resolved["feedback_path"] or ""), "Failed to delete resolved FEEDBACK.md card!"
+    print("  [OK] Audit resolved. Gaps satisfied, loop approved, feedback card deleted.")
     
     print("\n[ALL TESTS PASSED] System verified and running smoothly!")
 
