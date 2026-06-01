@@ -28,6 +28,9 @@
       </nav>
       
       <div class="user-profile">
+        <button class="settings-btn" id="btn-settings" title="Settings & API Keys">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </button>
         <div class="user-avatar">TG</div>
         <div class="user-name">Tay</div>
       </div>
@@ -530,6 +533,42 @@
           <div class="modal-section-title">Workstation Rules & Standards</div>
           <p class="modal-text" id="modal-agent-rules">Must align precisely with user parameters. Enforces that C-Suite strategic checks must pass before manager workflow breakdowns are generated.</p>
         </div>
+      </div>
+    </div>
+  </div>
+  <!-- API Settings Modal -->
+  <div class="agent-modal" id="settings-modal">
+    <div class="glass-panel modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-title">API &amp; LLM Orchestrator Configurations</div>
+          <div class="modal-subtitle">Provider keys saved securely in local browser sandboxed storage</div>
+        </div>
+        <button class="modal-close-btn" id="settings-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="settings-gemini-key">Gemini API Key</label>
+          <input type="password" id="settings-gemini-key" class="form-input" placeholder="AIzaSy...">
+        </div>
+        <div class="form-group">
+          <label for="settings-openai-key">OpenAI API Key</label>
+          <input type="password" id="settings-openai-key" class="form-input" placeholder="sk-proj-...">
+        </div>
+        <div class="form-group">
+          <label for="settings-anthropic-key">Anthropic API Key</label>
+          <input type="password" id="settings-anthropic-key" class="form-input" placeholder="sk-ant-...">
+        </div>
+        <div class="form-group">
+          <label for="settings-default-model">Target Browser Model</label>
+          <select id="settings-default-model" class="form-select">
+            <option value="gemini-2.5-flash">Gemini 2.5 Flash (Default)</option>
+            <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+            <option value="gpt-4o">OpenAI GPT-4o</option>
+            <option value="claude-3-5-sonnet">Anthropic Claude 3.5 Sonnet</option>
+          </select>
+        </div>
+        <button class="btn-primary" id="btn-save-settings" style="margin-top: 10px;">Save Keys &amp; Model</button>
       </div>
     </div>
   </div>

@@ -244,10 +244,53 @@ modalClose.addEventListener('click', () => {
   modal.classList.remove('active');
 });
 
+// --- Settings Modal Logic ---
+const btnSettings = document.getElementById('btn-settings');
+const settingsModal = document.getElementById('settings-modal');
+const settingsCloseBtn = document.getElementById('settings-close-btn');
+const btnSaveSettings = document.getElementById('btn-save-settings');
+
+const inputGemini = document.getElementById('settings-gemini-key');
+const inputOpenAI = document.getElementById('settings-openai-key');
+const inputAnthropic = document.getElementById('settings-anthropic-key');
+const selectDefaultModel = document.getElementById('settings-default-model');
+
+function loadStoredSettings() {
+  inputGemini.value = localStorage.getItem('gemini_api_key') || '';
+  inputOpenAI.value = localStorage.getItem('openai_api_key') || '';
+  inputAnthropic.value = localStorage.getItem('anthropic_api_key') || '';
+  selectDefaultModel.value = localStorage.getItem('default_browser_model') || 'gemini-2.5-flash';
+}
+
+// Load keys silently on boot so inputs are ready
+loadStoredSettings();
+
+btnSettings.addEventListener('click', () => {
+  loadStoredSettings();
+  settingsModal.classList.add('active');
+});
+
+settingsCloseBtn.addEventListener('click', () => {
+  settingsModal.classList.remove('active');
+});
+
+btnSaveSettings.addEventListener('click', () => {
+  localStorage.setItem('gemini_api_key', inputGemini.value.trim());
+  localStorage.setItem('openai_api_key', inputOpenAI.value.trim());
+  localStorage.setItem('anthropic_api_key', inputAnthropic.value.trim());
+  localStorage.setItem('default_browser_model', selectDefaultModel.value);
+  
+  settingsModal.classList.remove('active');
+  alert('Settings saved successfully!');
+});
+
 // Click outside modal to close
 window.addEventListener('click', (e) => {
   if (e.target === modal) {
     modal.classList.remove('active');
+  }
+  if (e.target === settingsModal) {
+    settingsModal.classList.remove('active');
   }
 });
 
@@ -406,55 +449,103 @@ btnLaunch.addEventListener('click', () => {
   // Dynamic step transition loop
   let currentStepIndex = 0;
   
-  function executeStep() {
-    if (currentStepIndex >= steps.length) {
-      // Done pipeline
-      btnLaunch.disabled = false;
-      monitorStatus.textContent = "completed";
-      monitorStatus.className = "monitor-status-badge";
-      logConsoleLine("[SYSTEM] Pipeline successfully completed!", 'success');
+  async function runLiveAIAudit(ideaText, platform, node, connector, dots, step) {
+    const key = localStorage.getItem('gemini_api_key');
+    const model = localStorage.getItem('default_browser_model') || 'gemini-2.5-flash';
+    const targetModel = model.startsWith('gemini') ? model : 'gemini-2.5-flash';
+    
+    logConsoleLine("[CDO] UX Reviewer - Initiating 30 Laws of UX review in LIVE AI Mode...", "highlight");
+    logConsoleLine("[SYSTEM] Connecting to Gemini API for real-time semantic analysis...", "system");
+    
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:generateContent?key=${key}`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: `You are the CDO (Chief Design Officer) and UX Law Reviewer of TayOS.
+Perform a professional UX law review of the following concept/idea against the 30 Laws of UX:
+Concept: "${ideaText}"
+Platform: ${platform}
+
+Structure your response into 3 short sections:
+1. ✅ Satisfied UX Laws (e.g. Miller's Law, Fitts's Law)
+2. ❌ Gaps / Violations Identified (e.g. Doherty Threshold concerns, Hick's Law)
+3. Actionable Design Changes
+
+Keep it punchy, professional, under 15 lines total, using bullet points and clear indicators.`
+            }]
+          }]
+        })
+      });
       
-      // Select UI design tree node to show updated project memory as visual detail
-      loadFile('project_billing_memory');
-      return;
+      if (!response.ok) {
+        throw new Error(`API returned status ${response.status}`);
+      }
+      
+      const data = await response.json();
+      const aiText = data.candidates[0].content.parts[0].text;
+      
+      logConsoleLine("[SUCCESS] Connection established. Processing real-time CDO audit:", "success");
+      
+      const lines = aiText.split('\n');
+      let lIndex = 0;
+      
+      function printAILine() {
+        if (lIndex >= lines.length) {
+          // Complete step
+          node.classList.remove('active');
+          node.classList.add('completed');
+          if (connector) connector.classList.add('completed');
+          
+          dots.forEach(d => {
+            const dot = document.getElementById(`status-${d}`);
+            if (dot) dot.className = "agent-status-dot completed";
+          });
+          
+          currentStepIndex++;
+          setTimeout(executeStep, 1000);
+          return;
+        }
+        
+        const lineText = lines[lIndex].trim();
+        if (lineText) {
+          let logType = 'system';
+          if (lineText.includes('✅') || lineText.startsWith('1.') || lineText.startsWith('##') || lineText.startsWith('**1.')) logType = 'success';
+          if (lineText.includes('❌') || lineText.includes('⚠️') || lineText.startsWith('2.') || lineText.startsWith('**2.')) logType = 'warning';
+          if (lineText.includes('CDO') || lineText.startsWith('3.') || lineText.startsWith('**3.')) logType = 'highlight';
+          logConsoleLine(lineText, logType);
+        }
+        lIndex++;
+        setTimeout(printAILine, 200);
+      }
+      
+      printAILine();
+      
+    } catch (err) {
+      logConsoleLine(`[WARNING] Gemini Live API call failed: ${err.message}. Falling back to simulated heuristics...`, "warning");
+      // Fallback to static logging
+      runHeuristicFallback(node, connector, dots, step);
     }
-    
-    const step = steps[currentStepIndex];
-    
-    // Highlight visual nodes
-    const node = document.getElementById(`stage-${step.id}`);
-    const connector = document.getElementById(`conn-${step.id}`);
-    
-    node.classList.add('active');
-    logConsoleLine(`[SYSTEM] Triggers: ${step.title}...`, 'highlight');
-    
-    // Animate Home Grid status dots
-    step.dots.forEach(d => {
-      const dot = document.getElementById(`status-${d}`);
-      if (dot) dot.className = "agent-status-dot executing";
-    });
-    
-    // Dynamic log feeding
+  }
+
+  function runHeuristicFallback(node, connector, dots, step) {
     let logIndex = 0;
-    
     function printNextLog() {
       if (logIndex >= step.logs.length) {
-        // Complete current workstation step
         node.classList.remove('active');
         node.classList.add('completed');
         if (connector) connector.classList.add('completed');
-        
-        // Update Home grid status dots to completed
-        step.dots.forEach(d => {
+        dots.forEach(d => {
           const dot = document.getElementById(`status-${d}`);
           if (dot) dot.className = "agent-status-dot completed";
         });
-        
         currentStepIndex++;
-        setTimeout(executeStep, 800); // Handoff interval to next workstation
+        setTimeout(executeStep, 800);
         return;
       }
-      
       const logText = step.logs[logIndex];
       let logType = 'system';
       if (logText.includes('[SUCCESS]')) logType = 'success';
@@ -493,10 +584,45 @@ btnLaunch.addEventListener('click', () => {
       
       logConsoleLine(logText, logType);
       logIndex++;
-      setTimeout(printNextLog, 450); // Log scroll speed
+      setTimeout(printNextLog, 450);
+    }
+    printNextLog();
+  }
+
+  function executeStep() {
+    if (currentStepIndex >= steps.length) {
+      // Done pipeline
+      btnLaunch.disabled = false;
+      monitorStatus.textContent = "completed";
+      monitorStatus.className = "monitor-status-badge";
+      logConsoleLine("[SYSTEM] Pipeline successfully completed!", 'success');
+      
+      // Select UI design tree node to show updated project memory as visual detail
+      loadFile('project_billing_memory');
+      return;
     }
     
-    printNextLog();
+    const step = steps[currentStepIndex];
+    
+    // Highlight visual nodes
+    const node = document.getElementById(`stage-${step.id}`);
+    const connector = document.getElementById(`conn-${step.id}`);
+    
+    node.classList.add('active');
+    logConsoleLine(`[SYSTEM] Triggers: ${step.title}...`, 'highlight');
+    
+    // Animate Home Grid status dots
+    step.dots.forEach(d => {
+      const dot = document.getElementById(`status-${d}`);
+      if (dot) dot.className = "agent-status-dot executing";
+    });
+    
+    // Check if we can intercept UI step with real Gemini API call
+    if (step.id === "ui" && checkUX.checked && localStorage.getItem('gemini_api_key')) {
+      runLiveAIAudit(ideaText, platform, node, connector, step.dots, step);
+    } else {
+      runHeuristicFallback(node, connector, step.dots, step);
+    }
   }
   
   // Clear visual stages on start

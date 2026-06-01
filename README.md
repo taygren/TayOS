@@ -62,6 +62,33 @@ Engage with the agent system visually using the **Agent Citadel Dashboard**—a 
 
 ---
 
+## 🔑 API Key & LLM Configurations
+
+TayOS supports robust, multi-provider AI model completions (Gemini, OpenAI, Anthropic) via both the Python CLI backend and the HTML5 Citadel Dashboard. 
+
+### 1. Backend CLI Integration (`.env` System)
+To power the agent orchestrator's backend execution with actual LLM completions:
+- Duplicate the provided `.env.example` template at the root of the workspace to `.env`.
+- Populate your API keys and preferred agent model:
+  ```env
+  GEMINI_API_KEY=your_gemini_api_key_here
+  OPENAI_API_KEY=your_openai_api_key_here
+  ANTHROPIC_API_KEY=your_anthropic_api_key_here
+  
+  # Configure your target orchestrator model via LiteLLM structure
+  AGENT_LLM_MODEL=gemini/gemini-2.5-flash
+  ```
+- Startup routines in `run_agents.py` and `ui_design/ux_reviewer.py` automatically load these parameters upon execution. If keys are missing, the system falls back gracefully to Heuristic Mode.
+
+### 2. Frontend Dashboard Integration (Browser LocalStorage)
+Since browser sandboxes prevent reading secure local system environment files directly, TayOS leverages sandboxed local browser storage:
+- Click on the sleek **Gear Icon (⚙️)** in the top navigation bar header.
+- Paste your keys (e.g. `GEMINI_API_KEY`) and select your **Target Browser Model** (e.g. *Gemini 2.5 Flash*).
+- Click **Save Keys & Model**. 
+- With a saved Gemini key, checking the **"Run automated UX Law Reviewer audit"** checkbox and launching the pipeline will cause the CDO (Chief Design Officer) agent to execute a **live semantic audit** using the Gemini API directly from your browser! The real-time, high-fidelity AI reviews are streamed directly into your dashboard console logs.
+
+---
+
 ## 🚀 Get Started
 
 ### 1. Local Browser Launch

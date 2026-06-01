@@ -1,6 +1,10 @@
 import os
 import sys
 import argparse
+from dotenv import load_dotenv
+
+# Load env variables from local workspace .env if present
+load_dotenv()
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table

@@ -1,6 +1,9 @@
 import os
 import json
 from typing import Dict, List, Any, Optional
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # The 30 Laws of UX grouped by domain
 LAWS_OF_UX = {

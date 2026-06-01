@@ -895,3 +895,30 @@ body {
     opacity: 1;
   }
 }
+
+/* Premium Settings Gear Button Styles */
+.settings-btn {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  margin-right: 8px;
+}
+
+.settings-btn:hover {
+  color: var(--primary-cyan);
+  background: var(--glass-hover);
+  border-color: rgba(180, 75, 48, 0.3);
+  transform: rotate(45deg);
+}
+
+.settings-btn svg {
+  transition: var(--transition-smooth);
+}
+
