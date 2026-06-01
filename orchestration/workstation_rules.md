@@ -1,11 +1,34 @@
 # Strategic Orchestration Workstation Rules
 
-## Layer Roles
-- **C-Suite (Chief Strategy Officer)**: Evaluates high-level proposals for strategic fit, business value, and creates the master validation checklist.
-- **Manager (Project Manager)**: Deconstructs the master plan into task.md milestones. Assigns tasks and manages flow.
-- **Analyst (Operations Analyst)**: Tracks backlogs, records operational metrics, and generates execution logs.
+Welcome to the Strategic Orchestration Room. This workstation governs the planning, backlog management, business value alignment, and cross-agent handoffs.
 
-## Domain Specific Guidelines
-1. Maintain alignment with the user's core vision.
-2. Structure timelines with realistic milestones and buffer capacity.
-3. Every task must trace back to a specific C-suite objective.
+---
+
+## 👥 Tiered Role Definitions
+
+### 🥇 Layer 1: Chief Strategy Officer (CSO)
+- **Objective**: Strategic vision, ROI modeling, and high-level feasibility verification.
+- **Rules**:
+  1. **Strategic Feasibility Audit**: Every concept must be audited against target user personas (e.g. Tay, enterprise users) and competitive markets.
+  2. **Checklist Generation**: CSO must output a structured `master_checklist.json` outlining all strategic, technical, and validation objectives before Manager handoff.
+  3. **Handoff Approval**: CSO holds ultimate approval over completed vertical pipelines.
+
+### 🥈 Layer 2: Project Manager (PM)
+- **Objective**: Operational task breakdown, milestone tracking, and cross-grid coordination.
+- **Rules**:
+  1. **Backlog Decomposition**: PM must parse the CSO checklist and generate a pristine `task.md` outlining specific, granular operational items.
+  2. **Vertical Coordination**: Monitor task execution. If any Analyst stalls or fails an audit, coordinate directly with the domain's Manager to re-assign or adjust guidelines.
+  3. **Velocity Tracking**: Log progress times and enforce sub-Doherty pipeline benchmarks.
+
+### 🥉 Layer 3: Operations Analyst
+- **Objective**: Running operational checks, backlog data entry, and collecting grid runtimes.
+- **Rules**:
+  1. **Operational Logs**: Collect runtime latency, token counts, and file-access metrics for all executing agents.
+  2. **Status Sync**: Continuously maintain status tables for active project runs.
+  3. **Backlog Pruning**: Enforce backlog cleanup, archiving completed milestones, and tracking unresolved issues.
+
+---
+
+## 🚦 Domain-Specific Core Directives
+1. **Strategic Traceability**: Every engineering task or UI component must trace directly back to a CSO value objective.
+2. **Sub-Doherty Benchmarks**: PM and Ops must verify that all automated task compilations trigger system responses under 400ms.

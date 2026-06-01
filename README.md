@@ -1,117 +1,95 @@
-# Tay's Multi-Layered Autonomous Agent System (Grid-Orchestrator)
+# TayOS: Multi-Layered Autonomous Agent System
 
-A robust, end-to-end multi-layered autonomous AI agent orchestrator designed for **Tay, a Strategy Consultant and AI/Solution Engineer**. This system translates concepts and ideas into high-fidelity production plans, code, and test systems across 6 target functional domains, operating via a 3-tier organizational hierarchy and driven by a growing, spatial `MEMORY.md` learning palace.
+Welcome to **TayOS**—a sophisticated, multi-layered autonomous AI agent orchestrator engineered specifically for **Tay, a Strategy Consultant and AI/Solution Engineer**. 
 
----
+TayOS systematically translates raw technical and business concepts into high-fidelity production plans, clean typed code modules, and robust test suites. It operates via a 3-tier organizational hierarchy across 6 distinct functional domains, coordinate rules and lessons via a spatial Memory Palace hierarchy, and optimizes system quality through vertical and horizontal closed-loop audits.
 
-## 🏗️ System Architecture
-
-The core of the system is structured as a **3x6 Agent Grid Matrix**, assigning clear levels of delegation, supervision, and execution across all key engineering and business operations.
-
-```mermaid
-graph TD
-    User([Tay / Idea Creator]) -->|Submit Idea / Prompt| C_Orch[C-Suite: Strategic Orchestration]
-    
-    subgraph MemoryPalace ["Memory & Rules Palace"]
-        MP[(Hierarchical Markdown Memory)] <--> |Read/Write Context & Experience| C_Orch
-        MP <--> |Shared Learnings: MEMORY.md| C_Suite
-        MP <--> |Execution Details| Mgr
-    end
-    
-    subgraph CSuiteLayer ["C-Suite Layer (Plan, Frame, Review)"]
-        C_Orch --> C_Eng[C-Suite: Engineering]
-        C_Orch --> C_QA[C-Suite: QA & Review]
-        C_Orch --> C_Sec[C-Suite: Security]
-        C_Orch --> C_UI[C-Suite: UI & Design]
-        C_Orch --> C_Rel[C-Suite: Release]
-    end
-
-    subgraph ManagerLayer ["Manager Layer (Lead, Execute, Review)"]
-        C_Orch -.->|Delegates| M_Orch[Manager: Orchestration]
-        C_Eng -.->|Delegates| M_Eng[Manager: Engineering]
-        C_QA -.->|Delegates| M_QA[Manager: QA]
-        C_Sec -.->|Delegates| M_Sec[Manager: Security]
-        C_UI -.->|Delegates| M_UI[Manager: UI/Design]
-        C_Rel -.->|Delegates| M_Rel[Manager: Release]
-    end
-
-    subgraph AnalystLayer ["Analyst Layer (Technical Execution)"]
-        M_Orch --> A_Orch[Analyst: Planning & Tracking]
-        M_Eng --> A_Eng[Analyst: Coding & Dev]
-        M_QA --> A_QA[Analyst: Test Writing & Execution]
-        M_Sec --> A_Sec[Analyst: Vulnerability Scanning & Patching]
-        M_UI --> A_UI[Analyst: Assets & UI Code]
-        M_Rel --> A_Rel[Analyst: Build & Deploy Operations]
-    end
-```
+![TayOS Overview - Translating raw concepts into production reality](assets/idea_to_reality.png)
 
 ---
 
-## 👥 The 3-Tier Agent Hierarchy
+## 🏗️ 1. System Architecture: The 3x6 Agent Grid Matrix
 
-Each of the 6 core domains operates using a strict, collaborative 3-layer pattern:
+The core engine is structured as an interactive 3-tier grid separating planning, management, and technical execution across 6 specialized focus areas:
 
-### Layer 1: The C-Suite Agent (Plan, Frame, and Review)
-- **Objective**: Strategic vision, quality gates, and guideline enforcement.
-- **Responsibility**: Formulates high-level master checklists, designs system blueprints, defines architectural patterns, and runs global validation engines (e.g., auditing designs against the 30 Laws of UX).
+![TayOS Grid Matrix - Handoffs and vertical execution details](assets/grid_matrix_overview.jpg)
 
-### Layer 2: The Manager Agent (Lead, Execute, and Review)
-- **Objective**: Task planning, work breakdown, and draft review.
-- **Responsibility**: Translates C-Suite objectives into concrete backlogs (`task.md` or roadmap milestones), assigns coding directions, monitors execution progress, and performs technical reviews.
-
-### Layer 3: The Analyst Agent (Technical Execution)
-- **Objective**: Foundational execution, coding, testing, and operation.
-- **Responsibility**: Writes clean production code, implements specific business logic, designs mock objects and test files, executes scans, and deploys build pipelines.
+### Vertical Handoffs & Delegation Flow
+Work cascades dynamically down the matrix:
+1. **Layer 1: The C-Suite (Frame & Check)**: Formulates high-level ROI constraints, selects programming runtimes, defines system-wide guidelines (such as the 30 Laws of UX), and serves as the ultimate approval gate.
+2. **Layer 2: The Manager (Lead & Review)**: Translates C-Suite rules into milestone backlogs (`task.md`), schedules handoffs, designs test scenarios, and conducts rigorous reviews of code drafts.
+3. **Layer 3: The Analyst (Execute & Build)**: Writes raw modular code, compiles typing parameters, runs security static sweeps, develops responsive CSS sheets, and triggers deployment builds.
 
 ---
 
-## 🧠 Memory & Rules Architecture
+## 🧠 2. Memory & Rules Palace: Spatial Hierarchies
 
-The system coordinates rules and memories hierarchically to maintain domain awareness, learn from errors, and calibrate behavior to match your professional style.
+TayOS organizes constraints, styling conventions, and memories recursively through folders to guarantee maximum domain awareness and context preservation:
 
-```
-[Target Workspace Root]
- ├── global_rules.md              # Global defaults, system guidelines, and style rules
- ├── MEMORY.md                     # Root-level learning repository (cross-project memory)
- ├── [workstation-name]/           # Workstation domain specialization (e.g., ui_design, engineering)
- │    ├── workstation_rules.md     # Domain-specific constraints and tools
- │    └── MEMORY.md                # Domain-level ledger of successful snippets and past bugs
- └── projects/
-      └── [project-name]/          # Project folder for isolated, bounded work
-           ├── project_rules.md    # Tailored rules + calibrated work principles
-           └── MEMORY.md           # Project execution records and run logs
-```
+![Memory Palace Spatial Hierarchy - global, workstation, and project rulescard rules](assets/memory_hierarchy.jpg)
 
-### Core Memory Mechanisms
-1. **Rule Inheritance**: When an agent runs, it automatically loads rules in sequence: `Global Rules` $\rightarrow$ `Workstation Rules` $\rightarrow$ `Project Rules`. Local rules always override broader rules.
-2. **Memory Accumulation & Write-Backs**: Critical errors or successful milestones are automatically logged in `projects/[project-name]/MEMORY.md` and elevated to the specific workstation `MEMORY.md` or global `MEMORY.md` to prevent similar failures in future runs.
-3. **Behavioral Calibration**: The system analyzes existing work samples (code, specs, plans) to formulate visual guidelines, code style rules, and planning preferences, locking them directly into the project's rule card.
+- **Global Rules (`global_rules.md`)**: Enforce typing strictness, DRY/SOLID coding patterns, first-principles logic documentation, and no placeholders system-wide.
+- **Workstation Rules (`[domain]/workstation_rules.md`)**: Define specialized domain tools and target goals (e.g. CDO enforcing touch target sizes under the 30 Laws of UX; CISO enforcing directory traversal protection).
+- **Project Rules (`projects/[name]/project_rules.md`)**: Bounded rule cards tailored to a specific project’s technical stack.
 
 ---
 
-## 🎛️ Controller Interface CLI
+## 🔄 3. Closed-Loop Optimization & Audits
 
-Run project initialization, pipelines, UX audits, or behavior extractions using the command-line controller:
+To ensure performance excellence, TayOS breaks down operational silos through continuous vertical and horizontal closed-loop audits:
 
+![Horizontal Audit Loops - Engineering, QA, and Security gates](assets/audit_loops.jpg)
+
+- **Vertical Optimization Loops**: Analysts submit drafts to Managers $\rightarrow$ Managers audit drafts against the spec checklist. If gaps exist, a detailed `FEEDBACK.md` card is generated, and the loop transitions to a pulsing, amber `reviewing` state.
+- **Horizontal Optimization Loops**: 
+  - *Engineering $\leftrightarrow$ QA*: QA Analysts automatically compile unit tests against SWE modules. Any failed run writes bug files back to the Engineering workstation backlog.
+  - *Engineering/UI $\leftrightarrow$ Security*: SecOps Analysts run SAST sweeps on code modifications. Dependency alerts or path leaks instantly block release tags at the Release Gate.
+
+### 🗃️ Proactive Failure Prevention
+If an optimization loop fails to clear its checklist constraints in **more than 2 iterations**, TayOS escalates the errors and logs them directly to the workstation's spatial failure drawers to prevent the recurrence of common bugs on future runs:
+
+![Failure Drawer Logging and Proactive Injection - self-improving memory engine](assets/failure_drawer.png)
+
+---
+
+## 🖥️ Interactive Dashboard Portal
+
+Engage with the agent system visually using the **Agent Citadel Dashboard**—a highly polished, responsive dark-space interface:
+- **Interactive Grid Matrix**: Click on any of the 18 agent cards in the home grid to slide open their primary directives and rule card.
+- **Live Pipeline Simulator**: Enter a project target and raw idea to watch the stage nodes pulse, change colors (*Idle* $\rightarrow$ *Thinking* $\rightarrow$ *Executing* $\rightarrow$ *Reviewing* $\rightarrow$ *Completed*), and stream detailed console logs in real-time.
+- **Visual Audit Loops**: Watch CDO audit the UI Developer's draft, write the `FEEDBACK.md` log, overlay a glowing `Iter 2` amber badge, and clear it once constraints are satisfied.
+- **Memory Explorer**: Click on nodes in the directory tree sidebar to read workstation rules cards and project memories instantly inside the preview panel.
+
+---
+
+## 🚀 Get Started
+
+### 1. Local Browser Launch
+Simply double-click the root [index.html](file:///C:/Users/TaylorGrenawalt/.gemini/antigravity/scratch/tay-agent-orchestrator/index.html) file to run the dashboard natively in any modern web browser.
+
+### 2. Instant Vercel Deployment
+The repository is packed out-of-the-box for **Vercel Interactive Deployment**!
+- Connect your GitHub repository to Vercel and hit deploy.
+- The root files serve natively at the base path `/` with 100% routing stability.
+
+### 3. Controller CLI Options
+Run audits, trigger runs, or calibrate behavior using the command-line orchestrator:
 ```bash
-# 1. Initialize a Project
+# Initialize a project rules card and memory palace folder
 python run_agents.py init-project --project <name>
 
-# 2. Run the 3x6 agent grid simulation pipeline
-python run_agents.py run-pipeline --project <name> --query "High-level idea prompt"
+# Execute the 3x6 agent grid simulation pipeline
+python run_agents.py run-pipeline --project <name> --query "High-level concept prompt"
 
-# 3. Perform a UX audit against the 30 Laws of UX
-python run_agents.py audit-ux --project <name> --query "Description of layout" --platform "Mobile|Web"
+# Trigger the closed-loop optimization audit card
+python run_agents.py audit-loop --project <name> --domain ui_design --draft "Code draft" --checklist "Must have HSL;Must have border-radius" --iteration 1
 
-# 4. Extract custom guidelines from your work samples
-python run_agents.py analyze-behavior --project <name> --query "path/to/sample_file.py"
+# Calibrate behavioral guidelines from your work samples
+python run_agents.py analyze-behavior --project <name> --query "path/to/sample.py"
 ```
 
----
-
-## 🚦 System Verification
-
-Run the automated test suite to verify rules loading, memory write-backs, and UX audit functionality:
+### 🚦 Verification Run
+Ensure all integrations are verified by executing the automated test suite:
 ```bash
 python verify_system.py
 ```

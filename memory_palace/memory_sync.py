@@ -9,8 +9,16 @@ class MemoryPalaceSync:
         self.global_memory_path = os.path.join(self.root_dir, "MEMORY.md")
 
     def get_project_paths(self, project_name: str) -> Dict[str, str]:
-        """Resolves project paths under the workspace root."""
-        project_dir = os.path.join(self.root_dir, "projects", project_name)
+        """Resolves project paths under the workspace root with traversal protection."""
+        # Sanitize project_name to prevent directory traversal
+        clean_name = re.sub(r'[^a-zA-Z0-9_.-]', '', project_name)
+        project_dir = os.path.abspath(os.path.join(self.root_dir, "projects", clean_name))
+        
+        # Enforce boundary check
+        workspace_base = os.path.abspath(self.root_dir)
+        if not project_dir.startswith(workspace_base):
+            raise PermissionError("Security Violation: Path traversal escape attempt blocked!")
+            
         return {
             "dir": project_dir,
             "memory": os.path.join(project_dir, "MEMORY.md"),
